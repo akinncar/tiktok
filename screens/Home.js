@@ -19,26 +19,48 @@ const Home = () => {
   ];
 
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <AnimatedFlatList
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#000",
+      }}
+    >
+      <FlatList
         data={videos}
         keyExtractor={() => Math.random().toString()}
+        snapToAlignment={"center"}
+        snapToInterval={Dimensions.get("window").height + 10}
+        decelerationRate={"fast"}
+        pagingEnabled
         renderItem={({ item }) => (
-          <Video
-            source={{
-              uri: item,
-            }}
-            rate={1.0}
-            volume={1.0}
-            isMuted={true}
-            resizeMode="cover"
-            shouldPlay
-            isLooping
+          <View
             style={{
+              backgroundColor: "#000",
               width: Dimensions.get("window").width,
-              height: Dimensions.get("window").height,
+              height: Dimensions.get("window").height - 20,
+              justifyContent: "center",
+              alignItems: "center",
             }}
-          />
+          >
+            <Video
+              source={{
+                uri: item,
+              }}
+              rate={1.0}
+              volume={1.0}
+              isMuted={true}
+              resizeMode="cover"
+              playInBackground={false}
+              shouldPlay
+              isLooping
+              style={{
+                aspectRatio: 1,
+                width: Dimensions.get("window").width,
+              }}
+            />
+          </View>
         )}
       />
     </View>
