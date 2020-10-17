@@ -1,8 +1,11 @@
 import * as React from "react";
+import { View, Text, StyleSheet } from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Entypo, AntDesign, Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Home from "./screens/Home";
 
@@ -14,7 +17,8 @@ export default function Routes() {
       <Tab.Navigator
         tabBarOptions={{
           activeTintColor: "#fff",
-          inactiveTintColor: "#FFF",
+          activeBackgroundColor: "#000",
+          showLabel: false,
           style: {
             backgroundColor: "#000",
             borderTopColor: "#000",
@@ -26,7 +30,14 @@ export default function Routes() {
           component={Home}
           options={{
             tabBarIcon: ({ color }) => (
-              <Entypo name="home" color={color} size={26} />
+              <View style={styles.bottomTabItem}>
+                <MaterialCommunityIcons
+                  name="home-outline"
+                  color={color}
+                  size={26}
+                />
+                <Text style={styles.bottomTabItemText}>Home</Text>
+              </View>
             ),
           }}
         />
@@ -35,17 +46,37 @@ export default function Routes() {
           component={Home}
           options={{
             tabBarIcon: ({ color }) => (
-              <Ionicons name="ios-search" color={color} size={26} />
+              <View style={styles.bottomTabItem}>
+                <Ionicons name="ios-search" color={color} size={26} />
+                <Text style={styles.bottomTabItemText}>Home</Text>
+              </View>
             ),
           }}
         />
-        <Tab.Screen name="More" component={Home} />
+        <Tab.Screen
+          name="More"
+          component={Home}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <View style={styles.bottomTabAddItem}>
+                <MaterialCommunityIcons name="plus" color="#000" size={18} />
+              </View>
+            ),
+          }}
+        />
         <Tab.Screen
           name="Inbox"
           component={Home}
           options={{
             tabBarIcon: ({ color }) => (
-              <Entypo name="message" color={color} size={26} />
+              <View style={styles.bottomTabItem}>
+                <MaterialCommunityIcons
+                  name="message-outline"
+                  color={color}
+                  size={26}
+                />
+                <Text style={styles.bottomTabItemText}>Home</Text>
+              </View>
             ),
           }}
         />
@@ -54,7 +85,14 @@ export default function Routes() {
           component={Home}
           options={{
             tabBarIcon: ({ color }) => (
-              <AntDesign name="user" color={color} size={26} />
+              <View style={styles.bottomTabItem}>
+                <MaterialCommunityIcons
+                  name="account-outline"
+                  color={color}
+                  size={26}
+                />
+                <Text style={styles.bottomTabItemText}>Home</Text>
+              </View>
             ),
           }}
         />
@@ -62,3 +100,22 @@ export default function Routes() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  bottomTabItem: {
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  bottomTabItemText: {
+    color: "#fff",
+    fontSize: 10,
+  },
+
+  bottomTabAddItem: {
+    backgroundColor: "#fff",
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+  },
+});
